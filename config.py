@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Telegram Bot Configuration
-TELEGRAM_BOT_TOKEN = "8307489833:AAE4u0q9t3bgkq3eyDFyr6ndYcSW5YQT0b0"
+TELEGRAM_BOT_TOKEN = "8226952507:AAGPhIvSNikHOkDFTUAZnjTKQzxR4m9yIAU"
 AUTHORIZED_USER_ID = 8093708320
 
 # Pocket Option Configuration

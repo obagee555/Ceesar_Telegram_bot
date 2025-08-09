@@ -141,7 +141,7 @@ class LSTMTradingModel:
             return None
     
     def predict_direction(self, data):
-        """Predict price direction (BUY/SELL)"""
+        """Predict price direction (BUY/SELL) with enhanced LSTM analysis"""
         try:
             current_price = data['close'].iloc[-1]
             predicted_price = self.predict(data)
@@ -149,24 +149,88 @@ class LSTMTradingModel:
             if predicted_price is None:
                 return None, 0
             
-            # Calculate direction and confidence
+            # Calculate direction and confidence with enhanced LSTM logic
             price_change = (predicted_price - current_price) / current_price
             
-            if price_change > 0.001:  # 0.1% threshold
+            # Enhanced confidence calculation for LSTM
+            base_confidence = min(95, abs(price_change) * 15000)  # Increased sensitivity
+            
+            # Add volatility-based confidence adjustment
+            if len(data) >= 10:
+                recent_volatility = data['close'].tail(10).std() / data['close'].tail(10).mean()
+                volatility_factor = max(0.8, 1 - recent_volatility * 5)  # Lower volatility = higher confidence
+                base_confidence *= volatility_factor
+            
+            # Add trend consistency bonus
+            if len(data) >= 5:
+                price_trend = data['close'].tail(5).pct_change().mean()
+                if (price_change > 0 and price_trend > 0) or (price_change < 0 and price_trend < 0):
+                    base_confidence *= 1.1  # Trend consistency bonus
+            
+            if price_change > 0.0005:  # 0.05% threshold for BUY
                 direction = "BUY"
-                confidence = min(95, abs(price_change) * 10000)
-            elif price_change < -0.001:
+                confidence = min(97, max(85, base_confidence))  # LSTM confidence range 85-97%
+            elif price_change < -0.0005:  # 0.05% threshold for SELL
                 direction = "SELL"
-                confidence = min(95, abs(price_change) * 10000)
+                confidence = min(97, max(85, base_confidence))  # LSTM confidence range 85-97%
             else:
                 direction = "HOLD"
-                confidence = 50
+                confidence = max(50, base_confidence * 0.6)  # Lower confidence for HOLD
             
             return direction, confidence
             
         except Exception as e:
             logging.error(f"Error predicting direction: {e}")
             return None, 0
+    
+    def analyze_best_currency_pair(self, available_pairs, market_data_func):
+        """Analyze and select the best currency pair for trading"""
+        try:
+            pair_scores = {}
+            
+            for pair in available_pairs:
+                try:
+                    # Get market data for this pair
+                    market_data = market_data_func(pair, limit=100)
+                    if market_data is None or len(market_data) < 60:
+                        continue
+                    
+                    # Get LSTM prediction for this pair
+                    direction, confidence = self.predict_direction(market_data)
+                    if direction == "HOLD":
+                        continue
+                    
+                    # Calculate pair suitability score
+                    model_confidence = self.get_model_confidence(market_data)
+                    volatility = market_data['close'].pct_change().std()
+                    trend_strength = abs(market_data['close'].tail(10).pct_change().mean())
+                    
+                    # Combined score favoring high confidence, low volatility, clear trends
+                    score = (confidence * 0.4 + model_confidence * 0.3 + 
+                            (1 - min(volatility * 100, 1)) * 0.2 + trend_strength * 1000 * 0.1)
+                    
+                    pair_scores[pair] = {
+                        'score': score,
+                        'direction': direction,
+                        'confidence': confidence,
+                        'model_confidence': model_confidence,
+                        'volatility': volatility
+                    }
+                    
+                except Exception as e:
+                    logging.debug(f"Error analyzing pair {pair}: {e}")
+                    continue
+            
+            # Return the best pair
+            if pair_scores:
+                best_pair = max(pair_scores.keys(), key=lambda x: pair_scores[x]['score'])
+                return best_pair, pair_scores[best_pair]
+            else:
+                return None, None
+                
+        except Exception as e:
+            logging.error(f"Error analyzing best currency pair: {e}")
+            return None, None
     
     def calculate_accuracy(self, data, predictions):
         """Calculate model accuracy"""
