@@ -1,0 +1,6 @@
+2025-08-09 09:33:51,305 - __main__ - INFO - 🚀 Starting LSTM AI Telegram Trading Bot...
+2025-08-09 09:33:51,305 - __main__ - INFO - Bot Token: 8226952507:AAGPhIvSNikHOkDFTUAZnjTKQzxR4m9yIAU
+2025-08-09 09:33:51,305 - __main__ - INFO - Authorized User: 8093708320
+2025-08-09 09:33:51,305 - __main__ - INFO - Mode: On-demand signal generation
+2025-08-09 09:34:16,984 - telegram_lstm_bot - INFO - 🧠 Starting LSTM market analysis...
+2025-08-09 09:34:16,984 - telegram_lstm_bot - INFO - ✅ LSTM Signal Generated: GBP/USD SELL - 98.0% accuracy
