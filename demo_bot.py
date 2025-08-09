@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-Simplified Advanced Binary Trading Bot for Pocket Option
+Demo Simplified Advanced Binary Trading Bot
 Enhanced AI-Powered Signal Generator with Core Components
 
 Author: AI Trading Systems
-Version: 2.0 - Simplified Edition
+Version: 2.0 - Demo Edition
 License: Private Use Only
 """
 
@@ -12,7 +12,6 @@ import sys
 import os
 import asyncio
 import logging
-import signal
 from datetime import datetime
 import time
 
@@ -21,7 +20,6 @@ sys.path.append('/workspace')
 
 # Import simplified components
 from simplified_signal_generator import SimplifiedSignalGenerator
-from telegram_bot import TradingTelegramBot
 from config import *
 
 def setup_logging():
@@ -35,39 +33,22 @@ def setup_logging():
             level=getattr(logging, LOG_LEVEL),
             format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
             handlers=[
-                logging.FileHandler('logs/simplified_bot.log'),
+                logging.FileHandler('logs/demo_bot.log'),
                 logging.StreamHandler()
             ]
         )
         
-        logging.info("Simplified logging system initialized")
+        logging.info("Demo logging system initialized")
         
     except Exception as e:
         print(f"Error setting up logging: {e}")
 
-def setup_signal_handlers(bot, signal_generator):
-    """Setup signal handlers for graceful shutdown"""
-    def signal_handler(signum, frame):
-        logging.info(f"Received signal {signum}, shutting down gracefully...")
-        
-        # Stop signal generation
-        signal_generator.stop_signal_generation()
-        
-        # Stop bot
-        asyncio.create_task(bot.stop_bot())
-        
-        logging.info("Graceful shutdown initiated")
-        sys.exit(0)
-    
-    signal.signal(signal.SIGINT, signal_handler)
-    signal.signal(signal.SIGTERM, signal_handler)
-
-def print_simplified_startup_banner():
-    """Print simplified startup banner"""
+def print_demo_banner():
+    """Print demo startup banner"""
     banner = """
     ╔══════════════════════════════════════════════════════════════════════════════╗
     ║                                                                              ║
-    ║      🤖 SIMPLIFIED ADVANCED BINARY TRADING BOT v2.0                         ║
+    ║      🤖 DEMO SIMPLIFIED ADVANCED BINARY TRADING BOT v2.0                    ║
     ║                                                                              ║
     ║      🎯 Enhanced AI-Powered Signal Generator                                ║
     ║      📊 Advanced Technical Analysis                                         ║
@@ -75,7 +56,7 @@ def print_simplified_startup_banner():
     ║      📈 Market Sentiment Analysis                                           ║
     ║      ⚠️  Advanced Risk Management & Portfolio Optimization                  ║
     ║      📊 Real-Time Performance Tracking & Analytics                          ║
-    ║      💬 Enhanced Telegram Integration                                       ║
+    ║      🎮 DEMO MODE - Simulated Market Data                                   ║
     ║                                                                              ║
     ║      🚀 Powered by Machine Learning & Advanced Analytics                    ║
     ║                                                                              ║
@@ -91,6 +72,7 @@ def print_simplified_startup_banner():
     print(f"📈 Sentiment Analysis: News sentiment and market mood")
     print(f"⚠️  Risk Management: Dynamic position sizing and drawdown protection")
     print(f"📊 Performance Tracking: Real-time accuracy and profit monitoring")
+    print(f"🎮 Demo Mode: Simulated market data for testing")
     print("-" * 80)
 
 def validate_environment():
@@ -106,13 +88,6 @@ def validate_environment():
         for directory in required_dirs:
             os.makedirs(directory, exist_ok=True)
         
-        # Check configuration
-        if not TELEGRAM_BOT_TOKEN or TELEGRAM_BOT_TOKEN == "your_bot_token_here":
-            print("⚠️  Warning: Telegram bot token not configured")
-        
-        if not POCKET_OPTION_SSID or POCKET_OPTION_SSID == "your_ssid_here":
-            print("⚠️  Warning: Pocket Option SSID not configured")
-        
         print("✅ Environment validation completed")
         return True
         
@@ -120,77 +95,91 @@ def validate_environment():
         print(f"❌ Environment validation failed: {e}")
         return False
 
-def initialize_simplified_components():
-    """Initialize all simplified components"""
+def initialize_demo_components():
+    """Initialize all demo components"""
     try:
-        logging.info("🔧 Initializing simplified components...")
+        logging.info("🔧 Initializing demo components...")
         
         # Initialize simplified signal generator
         signal_generator = SimplifiedSignalGenerator()
         
-        # Initialize Telegram bot
-        telegram_bot = TradingTelegramBot()
+        logging.info("✅ Demo components initialized successfully")
         
-        logging.info("✅ Simplified components initialized successfully")
-        
-        return signal_generator, telegram_bot
+        return signal_generator
         
     except Exception as e:
-        logging.error(f"❌ Error initializing simplified components: {e}")
+        logging.error(f"❌ Error initializing demo components: {e}")
         raise
 
-async def run_simplified_bot():
-    """Run the simplified trading bot"""
+async def run_demo_bot():
+    """Run the demo trading bot"""
     try:
         # Setup logging
         setup_logging()
         
         # Print startup banner
-        print_simplified_startup_banner()
+        print_demo_banner()
         
         # Validate environment
         if not validate_environment():
             logging.error("Environment validation failed")
             return False
         
-        # Initialize simplified components
-        signal_generator, telegram_bot = initialize_simplified_components()
-        
-        # Setup signal handlers
-        setup_signal_handlers(telegram_bot, signal_generator)
+        # Initialize demo components
+        signal_generator = initialize_demo_components()
         
         # Start simplified signal generation
-        logging.info("🚀 Starting Simplified Signal Generation Engine...")
+        logging.info("🚀 Starting Demo Signal Generation Engine...")
         if not signal_generator.start_signal_generation():
-            logging.error("Failed to start simplified signal generation")
+            logging.error("Failed to start demo signal generation")
             return False
         
-        # Start Telegram bot
-        logging.info("🤖 Starting Simplified Telegram Bot...")
-        await telegram_bot.start_bot()
+        print("\n🎮 DEMO BOT IS NOW RUNNING!")
+        print("📡 Signal generation engine is active")
+        print("📊 Analyzing currency pairs in real-time")
+        print("🎯 Generating high-accuracy trading signals")
+        print("⏰ Press Ctrl+C to stop the bot")
+        print("-" * 80)
         
-        # Keep the bot running
+        # Keep the bot running and show status updates
+        signal_count = 0
         while True:
-            await asyncio.sleep(1)
+            await asyncio.sleep(30)  # Update every 30 seconds
+            
+            # Show status update
+            signal_count += 1
+            print(f"⏰ Status Update #{signal_count}: Bot is running...")
+            print(f"📊 Available pairs: {len(signal_generator.pocket_api.get_available_pairs())}")
+            print(f"📈 Signal history: {len(signal_generator.signal_history)} signals generated")
+            
+            if signal_generator.signal_history:
+                latest_signal = signal_generator.signal_history[-1]
+                print(f"🎯 Latest signal: {latest_signal['pair']} {latest_signal['direction']} "
+                      f"(Confidence: {latest_signal['confidence']:.1f}%)")
+            
+            print("-" * 50)
             
     except KeyboardInterrupt:
-        logging.info("⛔ Simplified bot stopped by user")
+        logging.info("⛔ Demo bot stopped by user")
+        print("\n⛔ Demo bot stopped by user")
     except Exception as e:
-        logging.error(f"💥 Fatal error in simplified bot: {e}")
+        logging.error(f"💥 Fatal error in demo bot: {e}")
+        print(f"💥 Fatal error in demo bot: {e}")
         raise
     finally:
-        logging.info("🛑 Simplified bot shutdown complete")
+        logging.info("🛑 Demo bot shutdown complete")
+        print("🛑 Demo bot shutdown complete")
 
 def main():
     """Main function"""
     try:
-        # Run the simplified bot
-        asyncio.run(run_simplified_bot())
+        # Run the demo bot
+        asyncio.run(run_demo_bot())
         
     except KeyboardInterrupt:
-        print("\n⛔ Simplified bot stopped by user")
+        print("\n⛔ Demo bot stopped by user")
     except Exception as e:
-        print(f"💥 Failed to start simplified bot: {e}")
+        print(f"💥 Failed to start demo bot: {e}")
         sys.exit(1)
 
 if __name__ == "__main__":

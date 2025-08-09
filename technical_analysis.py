@@ -5,7 +5,7 @@ from ta.utils import dropna
 from ta.volatility import BollingerBands, AverageTrueRange
 from ta.trend import MACD, ADXIndicator, SMAIndicator, EMAIndicator
 from ta.momentum import RSIIndicator, StochasticOscillator
-from ta.volume import VolumeSMAIndicator
+# from ta.volume import VolumeSMAIndicator  # Removed due to compatibility issues
 import logging
 from config import TECHNICAL_INDICATORS
 

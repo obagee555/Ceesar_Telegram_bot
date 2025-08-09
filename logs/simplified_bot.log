@@ -1,0 +1,57 @@
+2025-08-09 12:06:13,049 - root - INFO - Simplified logging system initialized
+2025-08-09 12:06:13,049 - root - INFO - 🔧 Initializing simplified components...
+2025-08-09 12:06:13,049 - root - INFO - Simplified LSTM models initialized successfully
+2025-08-09 12:06:13,050 - root - INFO - Models loaded successfully
+2025-08-09 12:06:13,061 - root - INFO - Performance tracking database initialized
+2025-08-09 12:06:13,061 - root - INFO - Authentication setup completed for UID: 74793694
+2025-08-09 12:06:13,061 - root - INFO - Simplified LSTM models initialized successfully
+2025-08-09 12:06:13,061 - root - INFO - Models loaded successfully
+2025-08-09 12:06:13,067 - root - INFO - Performance tracking database initialized
+2025-08-09 12:06:13,067 - root - INFO - Authentication setup completed for UID: 74793694
+2025-08-09 12:06:13,067 - root - INFO - Performance tracking database initialized
+2025-08-09 12:06:13,067 - root - INFO - ✅ Simplified components initialized successfully
+2025-08-09 12:06:13,067 - root - INFO - 🚀 Starting Simplified Signal Generation Engine...
+2025-08-09 12:06:13,067 - root - INFO - 🚀 Starting Simplified Signal Generation Engine...
+2025-08-09 12:06:13,067 - root - INFO - Starting Pocket Option API...
+2025-08-09 12:06:13,076 - root - ERROR - WebSocket error: [Errno -2] Name or service not known
+2025-08-09 12:06:13,076 - websocket - ERROR - [Errno -2] Name or service not known - goodbye
+2025-08-09 12:06:13,076 - root - INFO - WebSocket connection closed
+2025-08-09 12:06:15,068 - root - ERROR - Failed to start Pocket Option API
+2025-08-09 12:06:15,068 - root - ERROR - Failed to start simplified signal generation
+2025-08-09 12:06:15,068 - root - INFO - 🛑 Simplified bot shutdown complete
+2025-08-09 12:09:24,123 - root - INFO - Simplified logging system initialized
+2025-08-09 12:09:24,123 - root - INFO - 🔧 Initializing simplified components...
+2025-08-09 12:09:24,123 - root - INFO - Simplified LSTM models initialized successfully
+2025-08-09 12:09:24,123 - root - INFO - Models loaded successfully
+2025-08-09 12:09:24,130 - root - INFO - Performance tracking database initialized
+2025-08-09 12:09:24,136 - root - INFO - Simplified LSTM models initialized successfully
+2025-08-09 12:09:24,136 - root - INFO - Models loaded successfully
+2025-08-09 12:09:24,141 - root - INFO - Performance tracking database initialized
+2025-08-09 12:09:24,147 - root - INFO - Performance tracking database initialized
+2025-08-09 12:09:24,147 - root - INFO - ✅ Simplified components initialized successfully
+2025-08-09 12:09:24,147 - root - INFO - 🚀 Starting Simplified Signal Generation Engine...
+2025-08-09 12:09:24,147 - root - INFO - 🚀 Starting Simplified Signal Generation Engine...
+2025-08-09 12:09:24,147 - root - INFO - Starting Demo Pocket Option API...
+2025-08-09 12:09:24,151 - root - INFO - Demo Pocket Option API started successfully
+2025-08-09 12:09:24,152 - root - INFO - Performance tracking started
+2025-08-09 12:09:24,152 - root - INFO - Risk level set to: MODERATE
+2025-08-09 12:09:24,152 - root - INFO - ✅ Simplified Signal Generation Engine started successfully
+2025-08-09 12:09:24,152 - root - INFO - 🤖 Starting Simplified Telegram Bot...
+2025-08-09 12:09:24,185 - root - INFO - 🚀 Starting Simplified Signal Generation Engine...
+2025-08-09 12:09:24,185 - root - INFO - Starting Demo Pocket Option API...
+2025-08-09 12:09:24,189 - root - INFO - Demo Pocket Option API started successfully
+2025-08-09 12:09:24,189 - root - INFO - Performance tracking started
+2025-08-09 12:09:24,189 - root - INFO - Risk level set to: MODERATE
+2025-08-09 12:09:24,190 - root - INFO - ✅ Simplified Signal Generation Engine started successfully
+2025-08-09 12:09:24,190 - root - INFO - Signal generation started
+2025-08-09 12:09:24,190 - root - INFO - Performance tracking started
+2025-08-09 12:09:24,190 - root - INFO - Auto backup started
+2025-08-09 12:09:24,196 - root - INFO - Backup created: trading_bot_backup_20250809_120924.zip
+2025-08-09 12:09:24,454 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8226952507:AAGPhIvSNikHOkDFTUAZnjTKQzxR4m9yIAU/getMe "HTTP/1.1 200 OK"
+2025-08-09 12:09:24,455 - telegram.ext.Application - INFO - Application started
+2025-08-09 12:09:24,540 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8226952507:AAGPhIvSNikHOkDFTUAZnjTKQzxR4m9yIAU/deleteWebhook "HTTP/1.1 200 OK"
+2025-08-09 12:09:24,540 - root - INFO - Telegram bot started successfully
+2025-08-09 12:09:24,657 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8226952507:AAGPhIvSNikHOkDFTUAZnjTKQzxR4m9yIAU/sendMessage "HTTP/1.1 200 OK"
+2025-08-09 12:09:24,657 - root - ERROR - Error starting Telegram bot: 'Updater' object has no attribute 'idle'
+2025-08-09 12:09:24,657 - root - ERROR - 💥 Fatal error in simplified bot: 'Updater' object has no attribute 'idle'
+2025-08-09 12:09:24,657 - root - INFO - 🛑 Simplified bot shutdown complete

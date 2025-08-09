@@ -9,7 +9,7 @@ from telegram.ext import (
     Application, CommandHandler, MessageHandler, 
     CallbackQueryHandler, filters, ContextTypes
 )
-from signal_generator import SignalGenerator
+from simplified_signal_generator import SimplifiedSignalGenerator
 from risk_management import RiskManager
 from performance_tracker import PerformanceTracker
 from backup_manager import BackupManager
@@ -22,7 +22,7 @@ class TradingTelegramBot:
         self.application = None
         
         # Initialize components
-        self.signal_generator = SignalGenerator()
+        self.signal_generator = SimplifiedSignalGenerator()
         self.risk_manager = RiskManager()
         self.performance_tracker = PerformanceTracker()
         self.backup_manager = BackupManager()
@@ -550,7 +550,9 @@ Contact for technical support or issues.
             )
             
             # Keep the bot running
-            await self.application.updater.idle()
+            # Keep the bot running
+        while True:
+            await asyncio.sleep(1)
             
         except Exception as e:
             logging.error(f"Error starting Telegram bot: {e}")
